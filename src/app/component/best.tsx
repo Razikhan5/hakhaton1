@@ -5,7 +5,7 @@ function Best() {
     <div>
       <section className="body-font m-5">
         <div className="container px-5 mx-auto">
-          <h2 className="text-4xl font-bold text-black text-center mb-6">
+          <h2 className="text-4xl font-bold text-black text-left mb-6">
             Top Categories
           </h2>
           <div className="flex flex-wrap -m-4">

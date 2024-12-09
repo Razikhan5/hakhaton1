@@ -14,11 +14,11 @@ export default function Hero() {
           <FaArrowRightLong className="ml-2 text-lg" />
         </button>
       </div>
-      <div className="mt-8 md:mt-0 flex justify-center">
+      <div className="mt-8 md:mt-3 flex justify-center">
         <img 
           src="product.png" 
           alt="chair" 
-          className="rounded-lg w-[350px] md:w-[400px] h-[300px] md:h-[430px] object-cover" 
+          className="rounded-lg w-[350px] md:w-[400px] h-[300px] md:h-[540px] object-cover" 
         />
       </div>
     </section>

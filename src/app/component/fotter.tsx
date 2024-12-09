@@ -77,7 +77,7 @@ const Footer = () => {
       {/* Bottom Section */}
       <div className="flex flex-col sm:flex-row items-center justify-between border-t border-gray-300 mt-8 py-4 text-center">
         <p className="text-gray-600">
-          &copy; 2021 - Comforty - Designed & Developed by <span className="text-blue-500">Zainab</span>
+          &copy; 2021 - Comforty - Designed & Developed by <span className="text-blue-500">Razi</span>
         </p>
         <div className="flex justify-center space-x-4 mt-4 sm:mt-0">
           <FaCcPaypal className="text-3xl" />
