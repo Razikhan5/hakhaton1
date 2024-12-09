@@ -16,7 +16,7 @@ export default function Hero() {
       </div>
       <div className="mt-8 md:mt-3 flex justify-center">
         <img 
-          src="product.png" 
+          src="/product.png" 
           alt="chair" 
           className="rounded-lg w-[350px] md:w-[400px] h-[300px] md:h-[540px] object-cover" 
         />

@@ -18,7 +18,7 @@ function Nav() {
             <Link href="/faqs">FAQS</Link>
           </li>
           <div className="flex items-center space-x-1">
-            <img src='/vector.png' alt='icon'/>
+            <img src='/Vector.png' alt='icon'/>
             <span>Need Help?</span>
           </div>
         </div>
@@ -98,7 +98,7 @@ function Nav() {
            <Link href="/product">product</Link>
           </li>
           <li className="hover:text-teal-600">
-           <Link href="/pages">Pages</Link>
+           <Link href="/contant">Contact Us</Link>
           </li>
           <li className="hover:text-teal-600">
            <Link href="/about">About</Link>
