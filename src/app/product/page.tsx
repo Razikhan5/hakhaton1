@@ -1,6 +1,47 @@
-import React from "react";
+"use client";
 
-function Product() {
+import React, { useEffect, useState } from "react";
+import { client } from "../../sanity/lib/client"; // Import your Sanity client
+import Link from "next/link";
+import Image from "next/image"; // Import the Image component
+
+// Define the type for the product data fetched from Sanity
+type Product = {
+  _id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+};
+
+const Product: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    client
+      .fetch<Product[]>(
+        `*[_type == "products"]{
+          _id,
+          title,
+          price,
+          "imageUrl": image.asset->url
+        }[0...12]`
+      )
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((error: Error) => {
+        console.error(error);
+        setError(error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error loading products!</div>;
+
   return (
     <div>
       {/* Product Section */}
@@ -8,34 +49,26 @@ function Product() {
         <div className="container px-5 mx-auto">
           <h2 className="text-4xl font-bold text-black mb-8">All Products</h2>
           <div className="flex flex-wrap -m-4">
-            {/* Product Card */}
-            {[
-              { id: 1, name: "Library Stool Chair", price: "$20", src: "/best1.png" },
-              { id: 2, name: "Library Stool Chair", price: "$20", src: "/best2.png" },
-              { id: 3, name: "Library Stool Chair", price: "$220", src: "/best3.png" },
-              { id: 4, name: "Library Stool Chair", price: "$20", src: "/best4.png" },
-              { id: 5, name: "Modern Chair", price: "$30", src: "/bst1.png" },
-              { id: 6, name: "Office Desk Chair", price: "$20", src: "/bst2.png" },
-              { id: 7, name: "Wooden Stool", price: "$20", src: "/bst3.png" },
-              { id: 8, name: "Garden Bench", price: "$20", src: "/best1.png" },
-              { id: 9, name: "Product 9", price: "$50", src: "/best2.png" },
-              { id: 10, name: "Product 10", price: "$60", src: "/best3.png" },
-              { id: 11, name: "Product 11", price: "$70", src: "/bst1.png" },
-              { id: 12, name: "Product 12", price: "$80", src: "/bst2.png" },
-            ].map((product) => (
-              <div key={product.id} className="lg:w-1/4 md:w-1/2 p-4 w-full">
-                <a className="block relative h-64 rounded overflow-hidden">
-                  <img
+            {/* Product Cards */}
+            {products.map((product) => (
+              <div key={product._id} className="lg:w-1/4 md:w-1/2 p-4 w-full">
+                <Link
+                  href={`/products/${product._id}`}
+                  className="block relative h-64 rounded overflow-hidden"
+                >
+                  <Image
                     alt="ecommerce"
                     className="object-cover object-center w-full h-full block"
-                    src={product.src}
+                    src={product.imageUrl}
+                    width={300} // Set the width of the image
+                    height={256} // Set the height of the image
                   />
-                </a>
+                </Link>
                 <div className="mt-4">
                   <h2 className="text-lg font-medium text-[#007580]">
-                    {product.name}
+                    {product.title}
                   </h2>
-                  <p className="mt-1 text-gray-800">{product.price}</p>
+                  <p className="mt-1 text-gray-800">${product.price}</p>
                 </div>
               </div>
             ))}
@@ -68,22 +101,22 @@ function Product() {
             Follow Products And Discounts On Instagram
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-            {["/best1.png", "/best2.png", "/best3.png", "/bst1.png", "/bst2.png", "/bst3.png"].map(
-              (src, index) => (
-                <div key={index} className="relative">
-                  <img
-                    src={src}
-                    alt={`Product ${index + 1}`}
-                    className="w-full h-full object-cover rounded-lg shadow-md"
-                  />
-                </div>
-              )
-            )}
+            {products.slice(0, 6).map((product) => (
+              <div key={product._id} className="relative">
+                <Image
+                  src={product.imageUrl}
+                  alt={product.title}
+                  className="w-full h-full object-cover rounded-lg shadow-md"
+                  width={200} // Set the width of the image
+                  height={200} // Set the height of the image
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Product;

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import { FaBars, FaTimes, FaShoppingCart } from 'react-icons/fa';
-import Image from 'next/image';
+import Image from 'next/image'; // Import the Image component
 import Link from 'next/link';
 
 function Nav() {
@@ -18,7 +18,7 @@ function Nav() {
             <Link href="/faqs">FAQS</Link>
           </li>
           <div className="flex items-center space-x-1">
-            <img src='/Vector.png' alt='icon'/>
+            <Image src="/Vector.png" alt="icon" width={20} height={20} /> {/* Updated to Image component */}
             <span>Need Help?</span>
           </div>
         </div>
@@ -28,7 +28,7 @@ function Nav() {
       <div className="flex justify-between items-center px-4 py-2">
         {/* Logo */}
         <div className="flex items-center space-x-2">
-          <Image src="/Logo Icon.png" alt="Logo" width={30} height={40} />
+          <Image src="/Logo Icon.png" alt="Logo" width={30} height={40} /> {/* Updated to Image component */}
           <span className="text-xl font-bold text-gray-700">Comforty</span>
         </div>
 
@@ -63,24 +63,23 @@ function Nav() {
 
       {/* Links and Contact (Desktop) */}
       <div className="hidden md:flex justify-between items-center px-4 py-3 bg-white">
-      <div className="flex space-x-6 text-gray-700 list-none">
-  <li className="hover:text-teal-600">
-    <Link href="/">Home</Link>
-  </li>
-  <li className="hover:text-teal-600">
-    <Link href="/shope">Shope</Link>
-  </li>
-  <li className="hover:text-teal-600">
-    <Link href="/product">Product</Link>
-  </li>
-  <li className="hover:text-teal-600">
-    <Link href="/contant">Contact Us</Link>
-  </li>
-  <li className="hover:text-teal-600">
-    <Link href="/about">About</Link>
-  </li>
-</div>
-
+        <div className="flex space-x-6 text-gray-700 list-none">
+          <li className="hover:text-teal-600">
+            <Link href="/">Home</Link>
+          </li>
+          <li className="hover:text-teal-600">
+            <Link href="/shope">Shope</Link>
+          </li>
+          <li className="hover:text-teal-600">
+            <Link href="/product">Product</Link>
+          </li>
+          <li className="hover:text-teal-600">
+            <Link href="/contant">Contact Us</Link>
+          </li>
+          <li className="hover:text-teal-600">
+            <Link href="/about">About</Link>
+          </li>
+        </div>
 
         <div className="text-gray-700">Contact: (808) 555-0111</div>
       </div>
@@ -89,21 +88,20 @@ function Nav() {
       {menuOpen && (
         <div className="md:hidden flex flex-col items-center bg-white py-3 space-y-2 text-gray-700">
           <li className="hover:text-teal-600">
-           <Link href="/">Home</Link>
+            <Link href="/">Home</Link>
           </li>
           <li className="hover:text-teal-600">
-           <Link href="/shope">Shope</Link>
+            <Link href="/shope">Shope</Link>
           </li>
           <li className="hover:text-teal-600">
-           <Link href="/product">product</Link>
+            <Link href="/product">Product</Link>
           </li>
           <li className="hover:text-teal-600">
-           <Link href="/contant">Contact Us</Link>
+            <Link href="/contant">Contact Us</Link>
           </li>
           <li className="hover:text-teal-600">
-           <Link href="/about">About</Link>
+            <Link href="/about">About</Link>
           </li>
-        
         </div>
       )}
     </nav>

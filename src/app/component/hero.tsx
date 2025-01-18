@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaArrowRightLong } from "react-icons/fa6";
+import Image from 'next/image'; // Import the Image component
 
 export default function Hero() {
   return (
@@ -15,9 +16,11 @@ export default function Hero() {
         </button>
       </div>
       <div className="mt-8 md:mt-3 flex justify-center">
-        <img 
+        <Image 
           src="/Product.png" 
           alt="chair" 
+          width={400} // Set the width of the image
+          height={540} // Set the height of the image
           className="rounded-lg w-[350px] md:w-[400px] h-[300px] md:h-[540px] object-cover" 
         />
       </div>
