@@ -3,6 +3,10 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Nav from "./component/nav";
 import Footer from "./component/fotter";
+import { CartProvider } from "./component/contextApi";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ClerkProvider } from '@clerk/nextjs';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,15 +30,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Nav />
-        
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <ClerkProvider>
+      <CartProvider>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <Nav />
+            {children}
+            <ToastContainer />
+            <Footer />
+          </body>
+        </html>
+      </CartProvider>
+    </ClerkProvider>
   );
 }

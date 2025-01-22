@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaArrowRightLong } from "react-icons/fa6";
 import Image from 'next/image'; // Import the Image component
+import Link from 'next/link';
 
 export default function Hero() {
   return (
@@ -10,10 +11,12 @@ export default function Hero() {
         <h1 className="text-3xl md:text-4xl font-bold mb-1 leading-tight">Best Furniture</h1>
         <h1 className="text-3xl md:text-4xl font-bold mb-1 leading-tight">Collection For Your</h1>
         <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">Interior.</h1>
-        <button className="flex items-center mt-4 px-6 py-3 bg-[#007860] text-white rounded-lg hover:bg-[#272343]">
-          Shop Now
-          <FaArrowRightLong className="ml-2 text-lg" />
-        </button>
+        <Link href="/product"> {/* Add this Link component */}
+          <button className="flex items-center mt-4 px-6 py-3 bg-[#007860] text-white rounded-lg hover:bg-[#272343]">
+            Shop Now 
+            <FaArrowRightLong className="ml-2 text-lg" />
+          </button>
+        </Link>
       </div>
       <div className="mt-8 md:mt-3 flex justify-center">
         <Image 

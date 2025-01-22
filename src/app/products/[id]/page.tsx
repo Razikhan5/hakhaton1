@@ -1,36 +1,94 @@
+"use client";
+
+import { useCart } from '../../component/contextApi'; // Adjust the import path as needed
 import { client } from '../../../sanity/lib/client';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { useParams } from 'next/navigation'; // Import useParams
 
-// Define the type for the product data fetched from Sanity
+// Define the Product type
 type Product = {
   _id: string;
   title: string;
   price: number;
   imageUrl: string;
   description: string;
+  inventory: boolean;
+  stock?: number; // Optional field
 };
 
-export default async function ProductPage({
-  params,
-}: {
-  params: Promise<{ id: string }>
-}) {
-  const id = (await params).id;
+export default function ProductPage() {
+  const { addToCart } = useCart();
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const product = await client.fetch<Product>(
-    `*[_type == "products" && _id == $id][0]{
-      _id,
-      title,
-      price,
-      "imageUrl": image.asset->url,
-      description
-    }`,
-    { id }
-  );
+  const params = useParams(); // Use useParams to access dynamic route parameters
+
+  // Extract the `id` parameter from the URL
+  const { id } = params as { id: string }; // Type assertion for `id`
+
+  useEffect(() => {
+    if (!id) return; // Ensure `id` is available
+
+    const fetchProduct = async () => {
+      try {
+        const fetchedProduct = await client.fetch<Product>(
+          `*[_type == "product" && _id == $id][0]{
+            _id,
+            title,
+            price,
+            "imageUrl": image.asset->url,
+            description,
+            inventory,
+            stock
+          }`,
+          { id }
+        );
+
+        if (!fetchedProduct) {
+          setError('Product not found');
+        } else {
+          setProduct(fetchedProduct);
+        }
+      } catch (err) {
+        console.error('Error fetching product:', err);
+        setError('Failed to fetch product details');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center text-red-600 py-12">{error}</div>;
+  }
 
   if (!product) {
-    return <div>Product not found!</div>;
+    return <div className="text-center py-12">Product not found</div>;
   }
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: product._id,
+      name: product.title,
+      description: product.description,
+      price: product.price,
+      quantity: 1,
+      imageUrl: product.imageUrl,
+      inStock: product.inventory,
+    });
+
+    // Show a success toast
+    toast.success(`${product.title} added to cart!`);
+  };
 
   return (
     <div className="bg-gray-100 min-h-screen py-12">
@@ -45,6 +103,7 @@ export default async function ProductPage({
                 className="object-cover rounded-lg shadow-md"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
+                priority // Optimize loading for above-the-fold images
               />
             </div>
 
@@ -59,18 +118,18 @@ export default async function ProductPage({
               <p className="text-gray-700 text-lg mb-8">
                 {product.description}
               </p>
-
-              {/* Add to Cart Button */}
-              <button className="bg-[#007580] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[#005f6b] transition duration-300">
-                Add to Cart
+              <button
+                onClick={handleAddToCart}
+                className="bg-[#007580] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[#005f6b] transition duration-300"
+                disabled={!product.inventory} // Disable button if product is out of stock
+              >
+                {product.inventory ? 'Add to Cart' : 'Out of Stock'}
               </button>
-
-              {/* Additional Information */}
               <div className="mt-8 space-y-4">
                 <div className="flex items-center">
                   <span className="text-gray-600 mr-2">Availability:</span>
                   <span className="text-green-600 font-semibold">
-                    In Stock
+                    {product.inventory ? 'In Stock' : 'Out of Stock'}
                   </span>
                 </div>
                 <div className="flex items-center">

@@ -88,29 +88,46 @@ export default function Contact() {
       </div>
 
       {/* Responsive Images Section */}
-      <div className="w-full flex flex-wrap items-center mt-16 justify-evenly bg-slate-300 mx-4 md:mx-8 py-10">
-        <Image 
-          src="/don1.png"
-          alt="Service 1"
-          width={1000}
-          height={1000}
-          className="max-w-[200px] w-full h-auto mb-4 md:mb-0"
+      <div className="w-full flex flex-wrap items-center justify-evenly bg-slate-300 py-12 px-4 md:px-8">
+      {/* Service 1: High Quality */}
+      <div className="flex flex-col items-center text-center max-w-[300px] w-full mb-8 md:mb-0">
+        <Image
+          src="/don1.png" // Replace with your icon path
+          alt="High Quality"
+          width={80}
+          height={80}
+          className="mb-4"
         />
-        <Image 
-          src="/don2.png"
-          alt="Service 2"
-          width={1000}
-          height={1000}
-          className="max-w-[200px] w-full h-auto mb-4 md:mb-0"
-        />
-        <Image 
-          src="/done3.png"
-          alt="Service 3"
-          width={1000}
-          height={1000}
-          className="max-w-[200px] w-full h-auto"
-        />
+        <h3 className="text-xl font-bold mb-2">High Quality</h3>
+        <p className="text-gray-700">Crafted from top materials</p>
       </div>
+
+      {/* Service 2: Warranty Protection */}
+      <div className="flex flex-col items-center text-center max-w-[300px] w-full mb-8 md:mb-0">
+        <Image
+          src="/don2.png" // Replace with your icon path
+          alt="Warranty Protection"
+          width={80}
+          height={80}
+          className="mb-4"
+        />
+        <h3 className="text-xl font-bold mb-2">Warranty Protection</h3>
+        <p className="text-gray-700">Over 2 years</p>
+      </div>
+
+      {/* Service 3: 24/7 Support */}
+      <div className="flex flex-col items-center text-center max-w-[300px] w-full">
+        <Image
+          src="/done3.png" // Replace with your icon path
+          alt="24/7 Support"
+          width={80}
+          height={80}
+          className="mb-4"
+        />
+        <h3 className="text-xl font-bold mb-2">24/7 Support</h3>
+        <p className="text-gray-700">Dedicated support</p>
+      </div>
+    </div>
     </div>
   );
 }

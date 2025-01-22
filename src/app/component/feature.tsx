@@ -48,8 +48,8 @@ const Feature = () => { // Remove FeatureProps
     <div>
       <section className="body-font m-5">
         <div className="container px-5 mx-auto">
-          <h2 className="text-4xl font-bold text-black mb-6 text-left">
-            Best Seller
+          <h2 className="text-3xl font-bold text-black mb-6 text-left mt-10">
+           Feature Products
           </h2>
           <div className="flex flex-wrap -m-4">
             {products.map((product) => (

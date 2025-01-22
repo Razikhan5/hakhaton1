@@ -44,7 +44,7 @@ const Our: React.FC = () => {
 
   return (
     <div>
-      <section className="body-font m-5">
+      <section className="body-font m-5 mt-20">
         <div className="container px-5 mx-auto">
           <h2 className="flex justify-center items-center font-bold text-4xl text-black m-4 p-3">
             Our Collection

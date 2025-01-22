@@ -58,7 +58,7 @@ export default function About() {
       </div>
 
       {/* Featured Products Section */}
-      <div className="px-4 sm:px-8 md:px-48 py-8">
+      <div className="px-4 sm:px-8 md:px-48 py-8 grid-cols-3">
         <h1 className="text-2xl font-bold mb-4 pl-4">Our Popular Product Products</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
           {featureImages.map((val, i) => (

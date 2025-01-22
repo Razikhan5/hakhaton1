@@ -1,3 +1,4 @@
+import AuthPopup from "./component/AuthPopup";
 import Best from "./component/best";
 import Feature from "./component/feature"
 import { Header } from "./component/header";
@@ -14,7 +15,7 @@ export default function Home() {
     <Best />
     <Razi />
     <Our />
-   
+    <AuthPopup />
     
 
     </div>

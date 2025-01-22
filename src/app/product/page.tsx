@@ -45,7 +45,7 @@ const Product: React.FC = () => {
   return (
     <div>
       {/* Product Section */}
-      <section className="body-font bg-white mt-8">
+      <section className="body-font bg-white mt-16">
         <div className="container px-5 mx-auto">
           <h2 className="text-4xl font-bold text-black mb-8">All Products</h2>
           <div className="flex flex-wrap -m-4">
@@ -77,7 +77,7 @@ const Product: React.FC = () => {
       </section>
 
       {/* Newsletter and Instagram Section */}
-      <div className="bg-gray-50 py-10 px-4">
+      <div className="bg-gray-200 py-10 px-4 mt-20">
         {/* Newsletter Section */}
         <div className="max-w-2xl mx-auto text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-bold mb-6">
