@@ -37,6 +37,7 @@ export default function RootLayout({
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
             <Nav />
+            <script src="//code.tidio.co/j5cck1s2xwo2wegcko6ozmbo4qo7ydvr.js" async></script>
             {children}
             <ToastContainer />
             <Footer />

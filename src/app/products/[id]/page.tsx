@@ -24,10 +24,7 @@ export default function ProductPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const params = useParams(); // Use useParams to access dynamic route parameters
-
-  // Extract the `id` parameter from the URL
-  const { id } = params as { id: string }; // Type assertion for `id`
+  const { id } = useParams();
 
   useEffect(() => {
     if (!id) return; // Ensure `id` is available
@@ -35,7 +32,7 @@ export default function ProductPage() {
     const fetchProduct = async () => {
       try {
         const fetchedProduct = await client.fetch<Product>(
-          `*[_type == "product" && _id == $id][0]{
+          `*[_type == "products" && _id == $id][0]{
             _id,
             title,
             price,
